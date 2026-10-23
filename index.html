@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A.K. Soft Games – small games with one big idea</title>
+  <meta name="description" content="A.K. Soft Games is a tiny indie studio making small iPhone games with one big idea: Space Adventure, Echo Climb, Pour & Freeze, Ricochet Pop and Domino Bells.">
+  <link rel="canonical" href="https://kulykandrii.github.io/aksoftgames/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="A.K. Soft Games">
+  <meta property="og:description" content="Small games with one big idea. Calm, clever games for iPhone.">
+  <meta property="og:url" content="https://kulykandrii.github.io/aksoftgames/">
+  <meta property="og:image" content="https://kulykandrii.github.io/aksoftgames/assets/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0e0c16">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0e0c16;
+      --bg-2: #15121f;
+      --text: #faf8ff;
+      --soft: #aaa4c8;
+      --line: rgba(255, 255, 255, 0.08);
+      --cyan: #2ee6ff;
+      --violet: #8a5cff;
+      --pink: #ff4f9a;
+      --brand: linear-gradient(135deg, var(--cyan), var(--violet) 52%, var(--pink));
+      --radius: 28px;
+      --head: "Comfortaa", ui-rounded, system-ui, sans-serif;
+      --body: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 17px/1.6 var(--body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+    img, video { display: block; max-width: 100%; }
+    .wrap { width: min(1120px, 100% - 32px); margin: 0 auto; }
+
+    /* ---- The studio's mark: the gradient tile with "ak", as in the games' intro ---- */
+    .tile {
+      display: grid; place-items: center;
+      width: var(--s, 44px); aspect-ratio: 1;
+      border-radius: 24%;
+      background: var(--brand);
+      color: #fff;
+      font: 700 calc(var(--s, 44px) * 0.42) / 1 var(--head);
+      letter-spacing: -0.02em;
+      box-shadow: 0 0 calc(var(--s, 44px) * 0.6) rgba(138, 92, 255, 0.35);
+      flex: none;
+    }
+    .wordmark { display: flex; flex-direction: column; line-height: 1; font-family: var(--head); }
+    .wordmark b { font-weight: 700; font-size: var(--w, 22px); letter-spacing: 0.01em; }
+    .wordmark small { font-weight: 500; font-size: calc(var(--w, 22px) * 0.42); letter-spacing: 0.5em; color: var(--soft); margin-top: 0.45em; }
+
+    /* ---- Top bar ---- */
+    .bar { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      background: rgba(14, 12, 22, 0.72); border-bottom: 1px solid var(--line); }
+    .bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; --s: 38px; --w: 18px; }
+    .bar nav { display: flex; gap: 6px; }
+    .bar nav a { font: 700 14px var(--head); text-decoration: none; color: var(--soft); padding: 8px 14px; border-radius: 999px; transition: color .2s, background .2s; }
+    .bar nav a:hover { color: var(--text); background: rgba(255, 255, 255, 0.06); }
+
+    /* ---- Hero ---- */
+    .hero { position: relative; padding: 96px 0 72px; text-align: center; }
+    .hero::before {
+      content: ""; position: absolute; inset: -20% -10% auto; height: 640px; z-index: -1;
+      background:
+        radial-gradient(40% 50% at 30% 40%, rgba(46, 230, 255, 0.16), transparent 70%),
+        radial-gradient(40% 50% at 70% 35%, rgba(255, 79, 154, 0.16), transparent 70%),
+        radial-gradient(35% 45% at 50% 60%, rgba(138, 92, 255, 0.2), transparent 70%);
+    }
+    .lockup { display: inline-flex; align-items: center; gap: clamp(16px, 3vw, 28px); --s: clamp(84px, 14vw, 128px); --w: clamp(40px, 8vw, 72px); text-align: left; }
+    .lockup .tile { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 50% { transform: translateY(-8px) rotate(-2deg); } }
+    .hero h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .tagline { margin: 36px auto 10px; font: 700 clamp(26px, 4.4vw, 44px) / 1.2 var(--head); max-width: 18ch; }
+    .tagline span { background: var(--brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { color: var(--soft); max-width: 46ch; margin: 0 auto; }
+    .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font: 700 15px var(--head); text-decoration: none;
+      padding: 14px 22px; border-radius: 999px;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0) scale(0.98); }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .btn-brand { background: var(--brand); color: #fff; box-shadow: 0 10px 30px rgba(138, 92, 255, 0.35); }
+    .btn-ghost { background: rgba(255, 255, 255, 0.06); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+
+    /* ---- Games ---- */
+    section { padding: 56px 0; scroll-margin-top: 68px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+    h2 { font: 700 clamp(26px, 3.6vw, 36px) / 1.2 var(--head); }
+    .section-head p { color: var(--soft); max-width: 44ch; }
+    .games { display: grid; gap: 22px; }
+
+    .game {
+      --card: #1b1730; --ink: #fff; --muted: rgba(255, 255, 255, 0.72); --accent: var(--violet); --frame: #07060c;
+      position: relative; overflow: hidden;
+      display: grid; grid-template-columns: minmax(180px, 250px) 1fr; gap: clamp(20px, 4vw, 48px); align-items: center;
+      padding: clamp(20px, 3.4vw, 40px);
+      border-radius: var(--radius);
+      background: var(--card);
+      color: var(--ink);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    }
+    .game:nth-child(even) { grid-template-columns: 1fr minmax(180px, 250px); }
+    .game:nth-child(even) .phone { order: 2; }
+    .game::after { content: ""; position: absolute; inset: auto -20% -60% 30%; height: 120%; z-index: 0; pointer-events: none; background: radial-gradient(closest-side, var(--glow, transparent), transparent); opacity: .5; }
+    .game > * { position: relative; z-index: 1; }
+
+    .phone {
+      aspect-ratio: 9 / 19.5; width: 100%; max-width: 250px; justify-self: center;
+      border-radius: 34px; padding: 7px; background: var(--frame);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+      transform: rotate(var(--tilt, -2deg)); transition: transform .4s ease;
+    }
+    .game:nth-child(even) .phone { --tilt: 2deg; }
+    .game:hover .phone { transform: rotate(0) translateY(-4px); }
+    .phone video { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; background: #000; }
+
+    .head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+    .head img { width: 68px; height: 68px; border-radius: 22%; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
+    .game h3 { font: 700 clamp(24px, 3vw, 32px) / 1.15 var(--head); }
+    .game .kind { font: 700 13px var(--head); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; margin-top: 4px; }
+    .game .pitch { font: 700 clamp(18px, 2.2vw, 22px) / 1.35 var(--head); margin-bottom: 10px; }
+    .game .about { color: var(--muted); max-width: 52ch; }
+    .points { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 22px; }
+    .points li { font: 700 13px var(--head); padding: 7px 12px; border-radius: 999px; background: var(--chip, rgba(255, 255, 255, 0.1)); }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .store { background: var(--accent); color: var(--on-accent, #fff); box-shadow: 0 10px 24px var(--shadow, rgba(0, 0, 0, 0.25)); }
+    .status { display: inline-flex; align-items: center; gap: 8px; font: 700 14px var(--head); padding: 12px 18px; border-radius: 999px; background: var(--chip, rgba(255, 255, 255, 0.1)); }
+    .status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--dot, #ffd36b); box-shadow: 0 0 0 4px color-mix(in srgb, var(--dot, #ffd36b) 25%, transparent); }
+    .privacy { font-size: 14px; color: var(--muted); text-underline-offset: 3px; }
+
+    /* Each card wears its game's own look. */
+    .space   { --card: radial-gradient(120% 120% at 0% 0%, #1b1440, #07061a 60%); --accent: linear-gradient(135deg, #2ee6ff, #8a5cff); --glow: rgba(46, 230, 255, 0.35); --frame: #05040c; --chip: rgba(46, 230, 255, 0.12); --dot: #3dff9a; }
+    .echo    { --card: linear-gradient(160deg, #241b4a, #0d0f2b 70%); --accent: #ffd36b; --on-accent: #241b4a; --glow: rgba(255, 211, 107, 0.3); --chip: rgba(255, 243, 214, 0.1); --shadow: rgba(255, 211, 107, 0.25); }
+    .pour    { --card: linear-gradient(160deg, #e8f8fc, #fff7ec); --ink: #16233a; --muted: rgba(22, 35, 58, 0.72); --accent: #1a9ef0; --glow: rgba(255, 77, 148, 0.35); --frame: #ffffff; --chip: rgba(26, 158, 240, 0.12); --shadow: rgba(26, 158, 240, 0.3); }
+    .ricochet{ --card: radial-gradient(rgba(255, 69, 140, 0.16) 2px, transparent 2.5px) 0 0 / 18px 18px, #fff4e0; --ink: #17141c; --muted: rgba(23, 20, 28, 0.72); --accent: #ffd600; --on-accent: #17141c; --glow: rgba(255, 69, 140, 0.35); --frame: #17141c; --chip: rgba(255, 69, 140, 0.14); --dot: #ff458c; --shadow: rgba(23, 20, 28, 0.2);
+               box-shadow: 8px 8px 0 #000, 0 0 0 3px #17141c inset; }
+    .domino  { --card: radial-gradient(120% 120% at 100% 0%, #2a7a58, #134432 70%); --accent: #ffc952; --on-accent: #3a2410; --glow: rgba(255, 201, 82, 0.3); --frame: #3a2410; --chip: rgba(255, 243, 214, 0.12); --dot: #ffc952; --shadow: rgba(0, 0, 0, 0.3); }
+    .space, .echo, .pour, .ricochet, .domino { background: var(--card); }
+
+    /* ---- Follow and contact ---- */
+    .follow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .social {
+      display: flex; align-items: center; gap: 14px; padding: 20px 22px; border-radius: 22px; text-decoration: none;
+      background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line); transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .social:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18); }
+    .social svg { width: 34px; height: 34px; flex: none; }
+    .social b { display: block; font: 700 17px var(--head); }
+    .social span { color: var(--soft); font-size: 14px; }
+    .contact { text-align: center; padding: 64px 24px; border-radius: var(--radius); background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line); }
+    .contact p { color: var(--soft); margin: 10px auto 24px; max-width: 46ch; }
+
+    footer { padding: 36px 0 48px; color: var(--soft); font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { color: var(--soft); text-underline-offset: 3px; }
+    footer nav { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    @media (max-width: 760px) {
+      .bar nav a:not(:last-child) { display: none; }
+      .hero { padding: 64px 0 48px; }
+      .game, .game:nth-child(even) { grid-template-columns: 1fr; text-align: left; }
+      .game:nth-child(even) .phone { order: 0; }
+      .phone { max-width: 200px; }
+      .follow { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="A.K. Soft Games, to the top">
+      <span class="tile" aria-hidden="true">ak</span>
+      <span class="wordmark"><b>a.k.soft</b><small>GAMES</small></span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#games">Games</a>
+      <a href="#follow">Follow</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>A.K. Soft Games</h1>
+      <div class="lockup" aria-hidden="true">
+        <span class="tile">ak</span>
+        <span class="wordmark"><b>a.k.soft</b><small>GAMES</small></span>
+      </div>
+      <p class="tagline">Small games with <span>one big idea</span></p>
+      <p class="lead">A.K. Soft Games is a tiny indie studio making calm, clever games for iPhone. No timers, no pressure: each game is one idea, polished until it feels good in your hands.</p>
+      <div class="ctas">
+        <a class="btn btn-brand" href="#games">See the games</a>
+        <a class="btn btn-ghost" href="#follow">Follow the studio</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="games">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Our games</h2>
+        <p>Free to play. Ads appear only when you ask for a hint or a second chance, and they are child-safe for everyone.</p>
+      </div>
+
+      <div class="games">
+
+        <article class="game space">
+          <div class="phone"><video src="assets/space.mp4" poster="assets/space.jpg" muted loop playsinline preload="none" aria-label="Space Adventure gameplay"></video></div>
+          <div>
+            <div class="head">
+              <img src="assets/space-icon.png" alt="" width="68" height="68">
+              <div><h3>Space Adventure</h3><p class="kind">Cosmic Storm · arcade</p></div>
+            </div>
+            <p class="pitch">One thumb. One endless asteroid storm.</p>
+            <p class="about">Steer a neon ship through a storm that keeps getting faster. Grab shields and slow motion, chase your best score and unlock 16 ships, from Common to Legendary.</p>
+            <ul class="points"><li>16 ships</li><li>Missions and streaks</li><li>Game Center</li></ul>
+            <div class="actions">
+              <a class="btn store" href="https://apps.apple.com/app/id6760046666"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.37 1.94-3.5 2.03-3.56-1.1-1.62-2.83-1.84-3.44-1.86-1.46-.15-2.86.86-3.6.86-.75 0-1.89-.84-3.1-.82-1.6.02-3.07.93-3.89 2.36-1.66 2.88-.42 7.13 1.19 9.47.79 1.14 1.73 2.42 2.96 2.37 1.19-.05 1.64-.77 3.08-.77 1.43 0 1.84.77 3.1.74 1.28-.02 2.09-1.16 2.87-2.31.9-1.32 1.28-2.6 1.3-2.67-.03-.01-2.48-.95-2.5-3.81zM14.03 5.6c.65-.8 1.1-1.9.98-3-.94.04-2.09.63-2.77 1.42-.6.7-1.14 1.84-1 2.92 1.05.08 2.13-.54 2.79-1.34z"/></svg>Free on the App Store</a>
+              <a class="privacy" href="https://kulykandrii.github.io/space-adventure-privacy/">Privacy</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="game echo">
+          <div class="phone"><video src="assets/echo.mp4" poster="assets/echo.jpg" muted loop playsinline preload="none" aria-label="Echo Climb gameplay"></video></div>
+          <div>
+            <div class="head">
+              <img src="assets/echo-icon.png" alt="" width="68" height="68">
+              <div><h3>Echo Climb</h3><p class="kind">Fall to Rise · puzzle platformer</p></div>
+            </div>
+            <p class="pitch">Every fall leaves a stone you can stand on.</p>
+            <p class="about">A little moon-white runner dashes on its own; you only tap to jump. Fall into lava and it cools into a bridge, freeze in a laser and your echo blocks the beam. The way up is built from your own falls.</p>
+            <ul class="points"><li>20 handmade levels</li><li>One tap</li><li>Moonlit and calm</li></ul>
+            <div class="actions">
+              <span class="status">Coming soon to the App Store</span>
+              <a class="privacy" href="https://kulykandrii.github.io/echo-climb-privacy/">Privacy</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="game pour">
+          <div class="phone"><video src="assets/pour.mp4" poster="assets/pour.jpg" muted loop playsinline preload="none" aria-label="Pour and Freeze gameplay"></video></div>
+          <div>
+            <div class="head">
+              <img src="assets/pour-icon.png" alt="" width="68" height="68">
+              <div><h3>Pour &amp; Freeze</h3><p class="kind">Ice Puzzle · physics</p></div>
+            </div>
+            <p class="pitch">Tap to pour. Tap to freeze. Fill every glass.</p>
+            <p class="about">Real liquid that splashes, pools and spills. Freeze the stream right where it is: ice plugs a leak, raises a dam and puts a lid on a full glass so the next colour can pour over it.</p>
+            <ul class="points"><li>Real flowing liquid</li><li>Three stars a level</li><li>Bright and gentle</li></ul>
+            <div class="actions">
+              <span class="status">Coming soon to the App Store</span>
+              <a class="privacy" href="https://kulykandrii.github.io/pour-freeze-privacy/">Privacy</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="game ricochet">
+          <div class="phone"><video src="assets/ricochet.mp4" poster="assets/ricochet.jpg" muted loop playsinline preload="none" aria-label="Ricochet Pop gameplay"></video></div>
+          <div>
+            <div class="head">
+              <img src="assets/ricochet-icon.png" alt="" width="68" height="68">
+              <div><h3>Ricochet Pop</h3><p class="kind">Bank shots · comic puzzle</p></div>
+            </div>
+            <p class="pitch">Bank the shot. Pop the picture.</p>
+            <p class="about">A pixel picture made of coloured blocks hangs over your cannon. Every shot pops its own colour and bounces off everything else, so the best shots go round the corner. Clear the picture before the shots run out.</p>
+            <ul class="points"><li>Pixel pictures</li><li>Trick shots</li><li>KA-POW!</li></ul>
+            <div class="actions">
+              <span class="status">In development</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="game domino">
+          <div class="phone"><video src="assets/domino.mp4" poster="assets/domino.jpg" muted loop playsinline preload="none" aria-label="Domino Bells gameplay"></video></div>
+          <div>
+            <div class="head">
+              <img src="assets/domino-icon.png" alt="" width="68" height="68">
+              <div><h3>Domino Bells</h3><p class="kind">Chain reaction · music puzzle</p></div>
+            </div>
+            <p class="pitch">Set the pieces. Ring the tune.</p>
+            <p class="about">Place dominoes, arrows and splitters, press GO and watch the chain run. Every bell must ring, in the order of the tune. Get the timing right and the board plays a melody.</p>
+            <ul class="points"><li>20 levels</li><li>A tune in every level</li><li>Warm wooden table</li></ul>
+            <div class="actions">
+              <span class="status">In development</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="follow">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Follow the studio</h2>
+        <p>Short gameplay clips and new game prototypes every week. Tell us which one we should make next.</p>
+      </div>
+      <div class="follow">
+        <a class="social" href="https://www.youtube.com/@aksoftgames">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff0033" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8z"/><path fill="#fff" d="M9.6 15.6 15.8 12 9.6 8.4z"/></svg>
+          <div><b>YouTube</b><span>@aksoftgames</span></div>
+        </a>
+        <a class="social" href="https://www.tiktok.com/@aksoftgames">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25f4ee" d="M9.4 9.3v-1a7 7 0 0 0-1-.1 7.4 7.4 0 0 0-4.2 13.5 7.4 7.4 0 0 1 5.2-12.4z"/><path fill="#25f4ee" d="M9.6 20.2a3.4 3.4 0 0 0 3.4-3.2V1.1h2.9a5.5 5.5 0 0 1-.1-1H11.8v15.9a3.4 3.4 0 0 1-3.4 3.2 3.3 3.3 0 0 1-1.6-.4 3.4 3.4 0 0 0 2.8 1.4zM21.2 6.5v-1a5.5 5.5 0 0 1-3-.9 5.6 5.6 0 0 0 3 1.9z"/><path fill="#fe2c55" d="M18.2 4.6a5.5 5.5 0 0 1-1.4-3.6h-1a5.6 5.6 0 0 0 2.4 3.6zM8.4 12.4a3.4 3.4 0 0 0-1.6 6.4 3.4 3.4 0 0 1 3.6-5.3v-4a7 7 0 0 0-1-.1h-.2v3.1a3.3 3.3 0 0 0-.8-.1z"/><path fill="#fe2c55" d="M21.2 6.5v3.1a9.6 9.6 0 0 1-5.6-1.8v8.2a7.4 7.4 0 0 1-11.4 6.2A7.4 7.4 0 0 0 16.6 17V8.8a9.6 9.6 0 0 0 5.6 1.8v-4a5.6 5.6 0 0 1-1-.1z"/><path fill="#fff" d="M15.6 16.1V7.9a9.6 9.6 0 0 0 5.6 1.8V6.6a5.6 5.6 0 0 1-3-1.9 5.6 5.6 0 0 1-2.4-3.6h-2.9v15.9a3.4 3.4 0 0 1-6.2 1.9 3.4 3.4 0 0 1 1.6-6.4 3.3 3.3 0 0 1 1 .2V9.3a7.4 7.4 0 0 0-5.2 12.4 7.4 7.4 0 0 0 11.5-5.6z"/></svg>
+          <div><b>TikTok</b><span>@aksoftgames</span></div>
+        </a>
+        <a class="social" href="https://www.instagram.com/aksoftgames/">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".6" stop-color="#d62976"/><stop offset=".8" stop-color="#962fbf"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#ig)"/><rect x="5.5" y="5.5" width="13" height="13" rx="4" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.4" cy="7.6" r="1.1" fill="#fff"/></svg>
+          <div><b>Instagram</b><span>@aksoftgames</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <h2>Say hello</h2>
+        <p>Ideas, bugs, a level you could not beat, or a game you wish someone would make: we read every message.</p>
+        <a class="btn btn-brand" href="mailto:kyluk5@gmail.com?subject=A.K.%20Soft%20Games">kyluk5@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 A.K. Soft Games · Andrii Kulyk</span>
+    <nav aria-label="Privacy policies">
+      <a href="https://kulykandrii.github.io/space-adventure-privacy/">Space Adventure privacy</a>
+      <a href="https://kulykandrii.github.io/echo-climb-privacy/">Echo Climb privacy</a>
+      <a href="https://kulykandrii.github.io/pour-freeze-privacy/">Pour &amp; Freeze privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // The clips play only while their card is on screen, and not at all for people who asked for less motion.
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var videos = document.querySelectorAll(".phone video");
+    if (reduce || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { v.preload = "auto"; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      });
+    }, { threshold: 0.35 });
+    videos.forEach(function (v) { io.observe(v); });
+  })();
+</script>
+</body>
+</html>
