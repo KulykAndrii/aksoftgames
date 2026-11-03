@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A.K. Soft Games – small games with one big idea</title>
-  <meta name="description" content="A.K. Soft Games is a tiny indie studio making small iPhone games with one big idea: Space Adventure, Echo Climb, Pour & Freeze, Ricochet Pop and Domino Bells.">
+  <meta name="description" content="A.K. Soft Games is a tiny indie studio making small iPhone games with one big idea: Space Adventure, Shadow Walk, Echo Climb, Pour & Freeze, Ricochet Pop and Domino Bells.">
   <link rel="canonical" href="https://kulykandrii.github.io/aksoftgames/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="A.K. Soft Games">
@@ -154,7 +154,15 @@
     .ricochet{ --card: radial-gradient(rgba(255, 69, 140, 0.16) 2px, transparent 2.5px) 0 0 / 18px 18px, #fff4e0; --ink: #17141c; --muted: rgba(23, 20, 28, 0.72); --accent: #ffd600; --on-accent: #17141c; --glow: rgba(255, 69, 140, 0.35); --frame: #17141c; --chip: rgba(255, 69, 140, 0.14); --dot: #ff458c; --shadow: rgba(23, 20, 28, 0.2);
                box-shadow: 8px 8px 0 #000, 0 0 0 3px #17141c inset; }
     .domino  { --card: radial-gradient(120% 120% at 100% 0%, #2a7a58, #134432 70%); --accent: #ffc952; --on-accent: #3a2410; --glow: rgba(255, 201, 82, 0.3); --frame: #3a2410; --chip: rgba(255, 243, 214, 0.12); --dot: #ffc952; --shadow: rgba(0, 0, 0, 0.3); }
-    .space, .echo, .pour, .ricochet, .domino { background: var(--card); }
+    .shadow  { --card: linear-gradient(90deg, rgba(120, 14, 30, 0.5), transparent 8%, transparent 92%, rgba(120, 14, 30, 0.5)), radial-gradient(60% 90% at 35% 0%, rgba(255, 200, 130, 0.18), transparent 70%), linear-gradient(170deg, #2a1620, #100c18 65%); --accent: #ffd678; --on-accent: #2a1a1e; --glow: rgba(255, 170, 80, 0.3); --frame: #0c0910; --chip: rgba(255, 214, 120, 0.12); --dot: #ffd678; --shadow: rgba(255, 170, 80, 0.25);
+               box-shadow: inset 0 4px 0 #c8963f, inset 0 0 0 1px rgba(255, 214, 120, 0.14); }
+    .space, .shadow, .echo, .pour, .ricochet, .domino { background: var(--card); }
+
+    /* Shadow Walk is played sideways, so its phone lies on its side. */
+    .game.shadow { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+    .game.shadow:nth-child(even) { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+    .phone.wide { aspect-ratio: 19.5 / 9; max-width: 460px; border-radius: 30px; padding: 6px; }
+    .phone.wide video { border-radius: 24px; }
 
     /* ---- Follow and contact ---- */
     .follow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -180,6 +188,8 @@
       .game, .game:nth-child(even) { grid-template-columns: 1fr; text-align: left; }
       .game:nth-child(even) .phone { order: 0; }
       .phone { max-width: 200px; }
+      .game.shadow, .game.shadow:nth-child(even) { grid-template-columns: 1fr; }
+      .phone.wide { max-width: 100%; }
       .follow { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -242,6 +252,23 @@
             <div class="actions">
               <a class="btn store" href="https://apps.apple.com/app/apple-store/id6760046666?pt=128585058&amp;ct=site&amp;mt=8"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.37 1.94-3.5 2.03-3.56-1.1-1.62-2.83-1.84-3.44-1.86-1.46-.15-2.86.86-3.6.86-.75 0-1.89-.84-3.1-.82-1.6.02-3.07.93-3.89 2.36-1.66 2.88-.42 7.13 1.19 9.47.79 1.14 1.73 2.42 2.96 2.37 1.19-.05 1.64-.77 3.08-.77 1.43 0 1.84.77 3.1.74 1.28-.02 2.09-1.16 2.87-2.31.9-1.32 1.28-2.6 1.3-2.67-.03-.01-2.48-.95-2.5-3.81zM14.03 5.6c.65-.8 1.1-1.9.98-3-.94.04-2.09.63-2.77 1.42-.6.7-1.14 1.84-1 2.92 1.05.08 2.13-.54 2.79-1.34z"/></svg>Free on the App Store</a>
               <a class="privacy" href="https://kulykandrii.github.io/space-adventure-privacy/">Privacy</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="game shadow">
+          <div class="phone wide"><video src="assets/shadow.mp4" poster="assets/shadow.jpg" muted loop playsinline preload="none" aria-label="Shadow Walk gameplay"></video></div>
+          <div>
+            <div class="head">
+              <img src="assets/shadow-icon.png" alt="" width="68" height="68">
+              <div><h3>Shadow Walk</h3><p class="kind">Outrun the Light · puzzle platformer</p></div>
+            </div>
+            <p class="pitch">Walk on shadows. Mind the light.</p>
+            <p class="about">Pip is a little wooden puppet who is afraid of the spotlight. The toys' shadows on the wall are the only floor he has, and they slide as the light follows him: stand still and they settle under his feet, dash and they slip away.</p>
+            <ul class="points"><li>30 scenes in three acts</li><li>A new scene every day</li><li>No ads, no purchases</li></ul>
+            <div class="actions">
+              <a class="btn store" href="https://apps.apple.com/app/apple-store/id6826827089?pt=128585058&amp;ct=site&amp;mt=8"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.37 1.94-3.5 2.03-3.56-1.1-1.62-2.83-1.84-3.44-1.86-1.46-.15-2.86.86-3.6.86-.75 0-1.89-.84-3.1-.82-1.6.02-3.07.93-3.89 2.36-1.66 2.88-.42 7.13 1.19 9.47.79 1.14 1.73 2.42 2.96 2.37 1.19-.05 1.64-.77 3.08-.77 1.43 0 1.84.77 3.1.74 1.28-.02 2.09-1.16 2.87-2.31.9-1.32 1.28-2.6 1.3-2.67-.03-.01-2.48-.95-2.5-3.81zM14.03 5.6c.65-.8 1.1-1.9.98-3-.94.04-2.09.63-2.77 1.42-.6.7-1.14 1.84-1 2.92 1.05.08 2.13-.54 2.79-1.34z"/></svg>Free on the App Store</a>
+              <a class="privacy" href="https://kulykandrii.github.io/shadow-walk-privacy/">Privacy</a>
             </div>
           </div>
         </article>
@@ -355,6 +382,7 @@
     <span>© 2026 A.K. Soft Games · Andrii Kulyk</span>
     <nav aria-label="Privacy policies">
       <a href="https://kulykandrii.github.io/space-adventure-privacy/">Space Adventure privacy</a>
+      <a href="https://kulykandrii.github.io/shadow-walk-privacy/">Shadow Walk privacy</a>
       <a href="https://kulykandrii.github.io/echo-climb-privacy/">Echo Climb privacy</a>
       <a href="https://kulykandrii.github.io/pour-freeze-privacy/">Pour &amp; Freeze privacy</a>
     </nav>
